@@ -24,6 +24,7 @@ public class PlumelogClient {
     private final Deque<TraceLogMessage> traceLogDeque = new ConcurrentLinkedDeque<>();
     private final ExecutorService queueThread = Executors.newSingleThreadExecutor();
     private final ExecutorService executors = Executors.newFixedThreadPool(4);
+    private boolean close = false;
 
     public int signalMaxCount = 100;
 
@@ -45,7 +46,7 @@ public class PlumelogClient {
 
     private void initQueue() {
         queueThread.execute(() -> {
-            while (!Thread.currentThread().isInterrupted()) {
+            while (!close && !Thread.currentThread().isInterrupted()) {
                 try {
                     if (!runLogDeque.isEmpty()) {
                         JsonArray jsonElements = new JsonArray();
@@ -150,6 +151,7 @@ public class PlumelogClient {
     }
 
     public void close() {
+        close = true;
         queueThread.shutdown();
         executors.shutdown();
         runLogDeque.clear();
