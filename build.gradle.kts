@@ -1,19 +1,33 @@
 plugins {
     id("java")
+    `maven-publish`
 }
 
 group = "com.xbaimiao.plumelog.client"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    // gson
+    implementation("com.google.code.gson:gson:2.8.9")
 }
 
-tasks.test {
-    useJUnitPlatform()
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            url = uri("https://maven.xbaimiao.com/repository/releases/")
+            credentials {
+                username = project.findProperty("BaiUser").toString()
+                password = project.findProperty("BaiPassword").toString()
+            }
+        }
+    }
 }

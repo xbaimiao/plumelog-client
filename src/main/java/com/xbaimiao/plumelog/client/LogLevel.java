@@ -1,5 +1,5 @@
 package com.xbaimiao.plumelog.client;
 
-public enum InfoLevel {
+public enum LogLevel {
     INFO, ERROR, WARN, DEBUG
 }

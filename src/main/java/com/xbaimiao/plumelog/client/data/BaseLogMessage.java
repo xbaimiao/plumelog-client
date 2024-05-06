@@ -1,4 +1,4 @@
-package com.xbaimiao.plumelog.client;
+package com.xbaimiao.plumelog.client.data;
 
 /**
  * className：BaseLogMessage
@@ -8,7 +8,7 @@ package com.xbaimiao.plumelog.client;
  * @author Tank
  * @version 1.0.0
  */
-public class BaseLogMessage {
+public abstract class BaseLogMessage {
     /**
      * 记录服务IP
      */

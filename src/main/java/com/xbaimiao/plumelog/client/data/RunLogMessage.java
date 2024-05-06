@@ -1,4 +1,4 @@
-package com.xbaimiao.plumelog.client;
+package com.xbaimiao.plumelog.client.data;
 
 public class RunLogMessage extends BaseLogMessage {
 
